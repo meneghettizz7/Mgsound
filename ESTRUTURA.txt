@@ -1,0 +1,24 @@
+MgSound — estrutura organizada
+
+/
+├── index.html
+├── login.html
+├── cadastro.html
+├── manifest.json
+├── service-worker.js
+├── css/
+│   └── style.css
+├── js/
+│   ├── auth/
+│   │   └── auth.js
+│   ├── config/
+│   │   └── firebase.js
+│   ├── core/
+│   │   └── app.js
+│   └── pwa/
+│       └── pwa.js
+└── img/
+    ├── icon-192.png
+    ├── icon-512.png
+    ├── screenshot-wide.png
+    └── screenshot-mobile.png
