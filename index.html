@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
   <meta name="theme-color" content="#121212">
   <title>MgSound | Sua música</title>
 
@@ -121,7 +121,7 @@
       <input id="volume" type="range" min="0" max="1" step=".01" value=".8">
     </div>
 
-    <audio id="audio"></audio>
+    <audio id="audio" preload="metadata" playsinline></audio>
   </footer>
 
   <div id="songModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
@@ -175,11 +175,11 @@
 
         <label>
           Arquivo MP3
-          <input id="audioFile" type="file" accept="audio/mpeg,audio/mp3,.mp3">
+          <input id="audioFile" type="file" accept="audio/mpeg,.mp3">
         </label>
         <div id="audioCurrent" class="file-current hidden"></div>
 
-        <p class="form-hint">Os arquivos serão enviados para o Cloudinary. Configure o nome da nuvem e o preset de upload no arquivo <code>js/firebase.js</code> antes de usar o envio.</p>
+        <p class="form-hint">Os arquivos serão enviados para o Cloudinary. Configure o nome da nuvem e o preset de upload no arquivo <code>js/config/firebase.js</code> antes de usar o envio.</p>
 
         <div id="formError" class="error-box hidden"></div>
 

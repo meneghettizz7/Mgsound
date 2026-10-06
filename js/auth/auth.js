@@ -1,20 +1,26 @@
+// Este arquivo controla login, cadastro e mensagens de erro da autenticação.
 
+
+// Pega do arquivo de configuração a autenticação, o banco e o status da configuração.
 import { auth, db, firebaseConfigured } from "../config/firebase.js";
 
-
+// Funções do Firebase usadas para criar contas, fazer login e atualizar o perfil.
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
+// Funções do Firestore usadas para salvar o perfil do usuário.
 import { doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+// Atalho para buscar elementos HTML pelo ID.
 const $ = id => document.getElementById(id);
 
+// Área onde os erros de login ou cadastro são mostrados.
 const errorBox = $("authError");
 
-
+// Exibe uma mensagem de erro para o usuário.
 function showError(message) {
   errorBox.textContent = message;
   errorBox.classList.remove("hidden");

@@ -239,3 +239,52 @@ input[type="file"]::file-selector-button:hover {
     background: #19bd52;
     transform: translateY(-1px);
 }
+
+/* ===== AJUSTES MOBILE DO MGSound ===== */
+html { min-height: 100%; }
+body { min-width: 0; }
+button, input { -webkit-tap-highlight-color: transparent; }
+
+@media (max-width: 800px) {
+  body { overflow-x: hidden; padding-bottom: env(safe-area-inset-bottom); }
+  .layout { min-height: calc(100vh - 88px); grid-template-columns: 58px minmax(0,1fr); }
+  .sidebar { border-radius: 12px; }
+  .main { min-width: 0; overflow: hidden; }
+  .topbar { min-width: 0; }
+  .search { min-width: 0; }
+  .search input { min-width: 0; font-size: 16px; }
+  .top-actions { flex-shrink: 0; }
+  .topbar .green-button span { display: none; }
+  .topbar .green-button { min-width: 40px; padding: 10px; }
+  .songs-grid, .genre-cards { width: 100%; }
+  .song-card { min-width: 0; }
+  .artwork { aspect-ratio: 1 / 1; }
+  .modal { padding: max(10px, env(safe-area-inset-top)) 10px max(10px, env(safe-area-inset-bottom)); }
+  .modal-box { width: 100%; max-height: calc(100dvh - 20px); border-radius: 14px; }
+  .modal input:not([type=file]), .auth-form input { font-size: 16px; }
+  .player { height: 82px; padding-bottom: env(safe-area-inset-bottom); }
+  .player-center { min-width: 0; }
+  .timeline input { min-width: 0; }
+  .player-buttons button { min-width: 34px; min-height: 34px; }
+  .toast { bottom: calc(94px + env(safe-area-inset-bottom)); max-width: calc(100vw - 30px); text-align: center; }
+}
+
+@media (max-width: 420px) {
+  .layout { grid-template-columns: 52px minmax(0,1fr); padding: 5px 5px 0; }
+  .main { padding: 0 10px 26px; }
+  .topbar { margin: 0 -10px; padding: 0 10px; }
+  .songs-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .song-card { padding: 7px; }
+  .song-card h3 { font-size: 11px; }
+  .song-card > p { font-size: 9px; }
+  .genre-card { min-height: 72px; }
+  .player { grid-template-columns: minmax(0,1fr) auto; }
+  .player-center { max-width: 180px; }
+  .player-buttons { gap: 4px; }
+  .timeline span { display: none; }
+  .auth-body { padding: 14px; }
+  .auth-card { padding: 24px 18px; }
+}
+
+/* Safari/iPhone: mantém controles de arquivo legíveis e tocáveis. */
+input[type="file"] { max-width: 100%; min-height: 44px; }
