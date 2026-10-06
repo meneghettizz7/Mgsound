@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Entrar | MeneghettiSound</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="module" src="js/auth/auth.js"></script>
+
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#111318">
+    <link rel="apple-touch-icon" href="./img/icon-192.png">
+    <script src="./js/pwa/pwa.js"></script>
+</head>
+
+<body class="auth-body">
+    <main class="auth-card">
+        <a class="brand auth-brand" href="index.html">MgSound</a>
+
+        <p class="overline">BEM-VINDO DE VOLTA</p>
+        <h1>Entre na sua conta</h1>
+        <p class="muted">Acesse sua biblioteca musical.</p>
+
+        <form id="loginForm" class="auth-form">
+            <label>
+                E-mail
+                <input id="email" type="email" required autocomplete="email" placeholder="voce@email.com">
+            </label>
+
+            <label>
+                Senha
+                <input id="password" type="password" required autocomplete="current-password" placeholder="Sua senha">
+            </label>
+
+            <div id="authError" class="error-box hidden"></div>
+
+            <button class="green-button full" type="submit">Entrar</button>
+        </form>
+
+        <p class="auth-foot">Ainda não tem conta? <a href="cadastro.html">Criar conta</a></p>
+    </main>
+</body>
+</html>

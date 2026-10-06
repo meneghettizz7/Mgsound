@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#121212">
+  <title>MgSound | Sua música</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <script type="module" src="js/core/app.js"></script>
+
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#111318">
+  <link rel="apple-touch-icon" href="./img/icon-192.png">
+  <script src="./js/pwa/pwa.js"></script>
+</head>
+
+<body>
+  <div class="layout">
+
+    <aside class="sidebar">
+      <a class="brand" href="index.html"><span class="brand-icon">𝐦</span> MgSound</a>
+
+      <nav class="side-nav">
+        <button class="side-link active" data-view="home"><span>⌂</span> Início</button>
+        <button class="side-link" data-view="library"><span>▤</span> Sua biblioteca</button>
+      </nav>
+
+      <div class="side-footer">
+        <span class="online-dot"></span>
+        <span id="firebaseStatus">Verificando conexão...</span>
+      </div>
+    </aside>
+
+    <main class="main">
+
+      <header class="topbar">
+        <div class="history">
+          <button aria-label="Voltar">‹</button>
+          <button aria-label="Avançar">›</button>
+        </div>
+
+        <label class="search">
+          <span>⌕</span>
+          <input id="searchInput" type="search" placeholder="O que você quer ouvir?">
+        </label>
+
+        <div class="top-actions">
+          <span id="userEmail" class="user-email"></span>
+          <button id="logoutButton" class="outline-button">Sair</button>
+          <button id="addButton" class="green-button">＋ <span>Adicionar música</span></button>
+        </div>
+      </header>
+
+      <section class="welcome">
+        <div>
+          <p id="welcomeOverline" class="overline">SEU CATÁLOGO, SEU SOM</p>
+          <p id="welcomeText" class="muted welcome-text">Encontre todas as músicas disponíveis no MgSound.</p>
+        </div>
+      </section>
+
+      <section id="catalogGenresSection" class="section">
+        <div class="section-head">
+          <h2>Explore por estilo</h2>
+          <span class="muted tiny">Categorias automáticas</span>
+        </div>
+        <div id="genreCards" class="genre-cards">
+          <div class="empty compact">Cadastre uma música para criar sua primeira categoria.</div>
+        </div>
+      </section>
+
+      <section class="section songs-section">
+        <div class="section-head">
+          <div>
+            <h2 id="songsTitle">Todas as músicas</h2>
+            <p id="songsCount" class="muted tiny">Músicas disponíveis no catálogo</p>
+          </div>
+          <button id="showAll" class="plain-button hidden">Ver todas</button>
+        </div>
+
+        <div id="songsGrid" class="songs-grid">
+          <div class="empty">
+            <div class="empty-note">♫</div>
+            <h3 id="emptyTitle">Nenhuma música no catálogo</h3>
+            <p id="emptyText">O administrador ainda não cadastrou músicas.</p>
+            <button class="green-button" id="emptyAdd">＋ Adicionar música</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="player">
+    <div class="now-playing">
+      <div id="playerCover" class="player-cover">♫</div>
+      <div class="track-info">
+        <strong id="playerTitle">Nenhuma música selecionada</strong>
+        <span id="playerArtist">Escolha uma faixa da biblioteca</span>
+      </div>
+    </div>
+
+    <div class="player-center">
+      <div class="player-buttons">
+        <button id="previous" title="Anterior">|◂</button>
+        <button id="playPause" class="play-circle" title="Reproduzir">▶</button>
+        <button id="next" title="Próxima">▸|</button>
+      </div>
+      <div class="timeline">
+        <span id="elapsed">0:00</span>
+        <input id="seek" type="range" min="0" max="100" value="0">
+        <span id="duration">0:00</span>
+      </div>
+    </div>
+
+    <div class="volume">
+      <span>♫</span>
+      <input id="volume" type="range" min="0" max="1" step=".01" value=".8">
+    </div>
+
+    <audio id="audio"></audio>
+  </footer>
+
+  <div id="songModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-shade" data-close></div>
+
+    <div class="modal-box">
+      <div class="modal-head">
+        <div>
+          <p class="overline">SUA COLEÇÃO</p>
+          <h2 id="modalTitle">Adicionar música</h2>
+        </div>
+        <button class="plain-icon close" data-close aria-label="Fechar">×</button>
+      </div>
+
+      <form id="songForm">
+        <input type="hidden" id="songId">
+
+        <label>
+          Nome da música
+          <input id="songName" maxlength="100" required placeholder="Ex.: Noite Inteira">
+        </label>
+
+        <div class="form-row">
+          <label>
+            Artista
+            <input id="artist" maxlength="80" required placeholder="Nome do artista">
+          </label>
+          <label>
+            Estilo musical
+            <input id="genre" maxlength="40" required list="genreOptions" placeholder="Ex.: Pop">
+            <datalist id="genreOptions"></datalist>
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label>
+            Álbum
+            <input id="album" maxlength="80" placeholder="Opcional">
+          </label>
+          <label>
+            Ano
+            <input id="year" type="number" min="1900" max="2100" placeholder="2026">
+          </label>
+        </div>
+
+        <label>
+          Capa da música
+          <input id="coverFile" type="file" accept="image/png,image/jpeg,image/webp">
+        </label>
+        <div id="coverCurrent" class="file-current hidden"></div>
+
+        <label>
+          Arquivo MP3
+          <input id="audioFile" type="file" accept="audio/mpeg,audio/mp3,.mp3">
+        </label>
+        <div id="audioCurrent" class="file-current hidden"></div>
+
+        <p class="form-hint">Os arquivos serão enviados para o Cloudinary. Configure o nome da nuvem e o preset de upload no arquivo <code>js/firebase.js</code> antes de usar o envio.</p>
+
+        <div id="formError" class="error-box hidden"></div>
+
+        <div class="modal-actions">
+          <button type="button" class="dark-button" data-close>Cancelar</button>
+          <button id="saveSong" type="submit" class="green-button">Salvar música</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Criar conta | MgSound</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="module" src="js/auth/auth.js"></script>
+
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#111318">
+    <link rel="apple-touch-icon" href="./img/icon-192.png">
+    <script src="./js/pwa/pwa.js"></script>
+</head>
+
+<body class="auth-body">
+    <main class="auth-card">
+        <a class="brand auth-brand" href="index.html"><span class="brand-icon">♫</span> MgSound</a>
+
+        <p class="overline">FAÇA PARTE</p>
+        <h1>Crie sua conta</h1>
+        <p class="muted">Monte e organize sua própria biblioteca.</p>
+
+        <form id="registerForm" class="auth-form">
+            <label>
+                Nome
+                <input id="name" required maxlength="60" autocomplete="name" placeholder="Seu nome">
+            </label>
+
+            <label>
+                E-mail
+                <input id="email" type="email" required autocomplete="email" placeholder="voce@email.com">
+            </label>
+
+            <label>
+                Senha
+                <input id="password" type="password" required minlength="6" autocomplete="new-password" placeholder="Mínimo de 6 caracteres">
+            </label>
+
+            <div id="authError" class="error-box hidden"></div>
+
+            <button class="green-button full" type="submit">Criar conta</button>
+        </form>
+
+        <p class="auth-foot">Já possui conta? <a href="login.html">Entrar</a></p>
+    </main>
+</body>
+</html>
